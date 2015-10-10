@@ -1,0 +1,120 @@
+<html>
+<head>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
+  <script src="//js.leapmotion.com/leap-0.6.4.js"></script>
+  <script src="//js.leapmotion.com/leap-plugins-0.1.11.js"></script>
+  <script src="scripts/OrbitControls.js"></script>
+
+  <style>
+    body {
+      margin: 10px;
+      font-family: Helvetica;
+    }
+    canvas.leap-boneHand {
+      position: fixed;
+      top: 100;
+      left: 100;
+      display: none;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    td, th {
+      vertical-align: top;
+      padding: 3px;
+    }
+    th {
+      color: #555;
+    }
+    #view-source {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 10px;
+    }
+  </style>
+
+</head>
+<body>
+
+<a id="view-source" href="#">View Source</a>
+
+<h1>Bone Hand</h1>
+<p>
+  Insert hand for live demo.
+</p>
+<p>
+  Bone-Hand Plugin is for adding a hand with THREE.js quickly.
+</p>
+<p>
+  Re-packaged for local development using:
+  <ul>
+     <li>Yeoman</li>
+     <li>Generator-Simple</li>
+     <li>Grunt</li>
+  </ul>
+  &gt; grunt - starts demo at localhost:9000
+</p>
+
+<div id="leap-demo"></div>
+
+
+</body>
+
+<script>
+
+  // Set up plugins
+
+  Leap.loop()
+//    .use('transform', {vr: true})
+    .use('boneHand', {
+      targetEl: document.body,
+      opacity: 1,
+      arm : true
+    });
+
+
+
+  // Set up scene
+
+  var scene    = Leap.loopController.plugins.boneHand.scene;
+  var camera   = Leap.loopController.plugins.boneHand.camera;
+  var renderer = Leap.loopController.plugins.boneHand.renderer;
+
+  var plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(120,80),
+    new THREE.MeshPhongMaterial({wireframe: false, side: THREE.DoubleSide})
+  );
+
+  plane.scale.set(2,2,2);
+  plane.position.set(50,-50,-50);
+  plane.receiveShadow = true;
+  scene.add(plane);
+
+  camera.lookAt( plane.position );
+
+  var axisHelper = new THREE.AxisHelper( 100 );
+  scene.add( axisHelper );
+
+  var controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+
+  Leap.loopController.on('handFound', function(hand) {
+    console.log(hand);
+    document.querySelector('canvas').style.display = 'block';
+  }).on('handLost', function(hand){
+    if (Leap.loopController.frame(0).hands.length === 0){
+      document.querySelector('canvas').style.display = 'none';
+    }
+  });
+
+  document.getElementById('view-source').href = "view-source:" + window.location.href
+
+
+</script>
+
+</html>
