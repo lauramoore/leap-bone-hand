@@ -1,9 +1,15 @@
 <html>
 <head>
-
+ 
+ <!--
   <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
+  -->
+  <script src="bower_components/threejs/build/three.js"></script>
+  <!--
   <script src="//js.leapmotion.com/leap-0.6.4.js"></script>
-  <script src="//js.leapmotion.com/leap-plugins-0.1.11.js"></script>
+  -->
+  <script src="bower_components/leapjs/leap-0.6.4.js"></script>
+  <script src="bower_components/leapjs-plugins/main/leap-plugins-0.1.11.js"></script>
   <script src="scripts/OrbitControls.js"></script>
 
   <style>
@@ -12,9 +18,9 @@
       font-family: Helvetica;
     }
     canvas.leap-boneHand {
-      position: fixed;
+      position: relative;
       top: 100;
-      left: 100;
+      left: 0;
       display: none;
     }
     table, th, td {
@@ -46,18 +52,6 @@
 <h1>Bone Hand</h1>
 <p>
   Insert hand for live demo.
-</p>
-<p>
-  Bone-Hand Plugin is for adding a hand with THREE.js quickly.
-</p>
-<p>
-  Re-packaged for local development using:
-  <ul>
-     <li>Yeoman</li>
-     <li>Generator-Simple</li>
-     <li>Grunt</li>
-  </ul>
-  &gt; grunt - starts demo at localhost:9000
 </p>
 
 <div id="leap-demo"></div>

@@ -25,7 +25,7 @@ module.exports = function (grunt) {
         livereload: true
       },
       target: {
-        files: ['index.html', 'styles/**/*.css', 'scripts/**/*.js']
+          files: ['index.html', 'styles/**/*.css', 'scripts/**/*.js', 'bower_components/**/*.js']
       }
     }
   });

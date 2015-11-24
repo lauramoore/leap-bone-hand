@@ -1,6 +1,10 @@
 {
   "name": "leap-bone-hands",
   "version": "0.0.0",
-  "dependencies": {}
+  "dependencies": {
+    "leapjs": "~0.6.4",
+    "leapjs-plugins": "~0.1.11",
+    "threejs": "*",
+    "requirejs": "~2.1.20"
+  }
 }
-
